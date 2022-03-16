@@ -4,6 +4,8 @@ import 'package:lazyload/widgets/auth/auth_widget.dart';
 import 'package:lazyload/widgets/auth/main_screen/main_screen_widget.dart';
 import 'package:lazyload/widgets/auth/movie_details/movie_details_widget.dart';
 
+import 'widgets/auth/auth_model.dart';
+
 void main() {
   runApp(const MyApp());
 }
@@ -27,8 +29,9 @@ class MyApp extends StatelessWidget {
       ),
       debugShowCheckedModeBanner: false,
       routes: {
-        '/auth': (context) => AuthWidget(),
-        '/main_screen': (context) => MainScreenWidget(),
+        '/auth': (context) =>
+            AuthProvider(model: AuthModel(), child: const AuthWidget()),
+        '/main_screen': (context) => const MainScreenWidget(),
         '/main_screen/movie_details': (context) {
           final arguments = ModalRoute.of(context)?.settings.arguments;
           if (arguments is int) {
