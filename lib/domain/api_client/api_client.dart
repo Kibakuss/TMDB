@@ -1,11 +1,12 @@
 import 'dart:convert';
 import 'dart:io';
 
+
 class ApiClient {
   final _client = HttpClient();
   static const _host = 'https://api.themoviedb.org/3';
   static const _imageUrl = 'https:/image.tmdb.org/t/p/w500';
-  static const _apiKey = '0a2a46b5593a0978cc8e87ba34037430';
+  static const _apiKey = 'e3a3e7ba78d2df48176a4571fc568f2f';
 
   Future<String> auth({
     required String username,
@@ -79,7 +80,7 @@ class ApiClient {
   }
 }
 
-extension HttpClientResponseJsonnDecode on HttpClientResponse {
+extension HttpClientResponseJsonDecode on HttpClientResponse {
   Future<dynamic> jsonDecode() async {
     return transform(utf8.decoder)
         .toList()

@@ -32,7 +32,7 @@ class AuthModel extends ChangeNotifier {
     notifyListeners();
     String? sessionId;
     try {
-      final sessionId =
+       sessionId =
           await _apiClinet.auth(username: login, password: password);
     } catch (e) {
       _errorMessage = 'Неправильный логин или пароль!';
@@ -40,6 +40,7 @@ class AuthModel extends ChangeNotifier {
     _isAuthProgress = false;
     if (_errorMessage != null) {
       notifyListeners();
+      return;
     }
     if (sessionId == null) {
       _errorMessage = 'Неизвестная ошибка, повторите попытку';
@@ -54,7 +55,7 @@ class AuthModel extends ChangeNotifier {
 
 class AuthProvider extends InheritedNotifier {
   final AuthModel model;
-  AuthProvider({Key? key, required Widget child, required this.model})
+  const AuthProvider({Key? key, required Widget child, required this.model})
       : super(key: key, child: child, notifier: model);
 
   static AuthProvider? watch(BuildContext context) {
