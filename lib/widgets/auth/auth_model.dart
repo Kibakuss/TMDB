@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:lazyload/ui/navigation/main_navigation.dart';
 
 import '../../domain/api_client/api_client.dart';
 import '../../domain/data_providers/session_data_provider.dart';
@@ -48,23 +49,26 @@ class AuthModel extends ChangeNotifier {
       return;
     }
     await _sessionDataProvider.setSessionId(sessionId) ;
-    unawaited(Navigator.of(context).pushNamed('/main_screen'));
+    unawaited(Navigator.of(context).pushReplacementNamed(MainNavigationRouteNames.mainScreen));
     
   }
 }
 
-class AuthProvider extends InheritedNotifier {
-  final AuthModel model;
-  const AuthProvider({Key? key, required Widget child, required this.model})
-      : super(key: key, child: child, notifier: model);
+// class AuthProvider extends InheritedNotifier {
+//   final AuthModel model;
+//   const AuthProvider({Key? key, required Widget child, required this.model})
+//       : super(key: key, child: child, notifier: model);
 
-  static AuthProvider? watch(BuildContext context) {
-    return context.dependOnInheritedWidgetOfExactType<AuthProvider>();
-  }
+//   static AuthProvider? watch(BuildContext context) {
+//     return context.dependOnInheritedWidgetOfExactType<AuthProvider>();
+//   }
 
-  static AuthProvider? read(BuildContext context) {
-    final widget =
-        context.getElementForInheritedWidgetOfExactType<AuthProvider>()?.widget;
-    return widget is AuthProvider ? widget : null;
-  }
-}
+//   static AuthProvider? read(BuildContext context) {
+//     final widget =
+//         context.getElementForInheritedWidgetOfExactType<AuthProvider>()?.widget;
+//     return widget is AuthProvider ? widget : null;
+//   }
+// }
+
+
+

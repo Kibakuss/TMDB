@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:lazyload/widgets/auth/main_screen/main_screen_widget.dart';
+import 'package:lazyload/ui/navigation/main_navigation.dart';
+
 
 class Movie {
   final int id;
@@ -18,7 +19,7 @@ class Movie {
 }
 
 class MovieListWidget extends StatefulWidget {
-  MovieListWidget({Key? key}) : super(key: key);
+  const MovieListWidget({Key? key}) : super(key: key);
 
   @override
   State<MovieListWidget> createState() => _MovieListWidgetState();
@@ -133,7 +134,7 @@ class _MovieListWidgetState extends State<MovieListWidget> {
   void _onMovieTap(int index) {
     final id = _movies[index].id;
     Navigator.of(context).pushNamed(
-      "/main_screen/movie_details",
+      MainNavigationRouteNames.movieDetails,
       arguments: id,
     );
   }
@@ -143,7 +144,7 @@ class _MovieListWidgetState extends State<MovieListWidget> {
     return Stack(
       children: [
         ListView.builder(
-          padding: EdgeInsets.only(top: 70),
+          padding: const EdgeInsets.only(top: 70),
           keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
           itemCount: _filtredMovies.length,
           itemExtent: 163,
@@ -175,24 +176,24 @@ class _MovieListWidgetState extends State<MovieListWidget> {
                         Image(
                           image: AssetImage(movie.imageName),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           width: 20,
                         ),
                         Expanded(
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              SizedBox(
+                              const SizedBox(
                                 height: 20,
                               ),
                               Text(
                                 movie.title,
                                 maxLines: 1,
                                 overflow: TextOverflow.ellipsis,
-                                style: TextStyle(
+                                style: const TextStyle(
                                     fontSize: 16, fontWeight: FontWeight.bold),
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 height: 5,
                               ),
                               Text(
@@ -202,7 +203,7 @@ class _MovieListWidgetState extends State<MovieListWidget> {
                                 style: TextStyle(
                                     fontSize: 14.4, color: Colors.grey[600]),
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 height: 20,
                               ),
                               Text(
@@ -213,7 +214,7 @@ class _MovieListWidgetState extends State<MovieListWidget> {
                             ],
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           width: 10,
                         )
                       ],
@@ -239,7 +240,7 @@ class _MovieListWidgetState extends State<MovieListWidget> {
               labelText: "Поиск",
               filled: true,
               fillColor: Colors.white.withAlpha(235),
-              border: OutlineInputBorder(),
+              border: const OutlineInputBorder(),
             ),
           ),
         ),

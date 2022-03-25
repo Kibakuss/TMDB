@@ -1,9 +1,11 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, prefer_const_declarations, non_constant_identifier_names
+
 
 import 'package:flutter/material.dart';
 import 'package:lazyload/Theme/app_button_style.dart';
 import 'package:lazyload/widgets/auth/auth_model.dart';
-import 'package:lazyload/widgets/auth/main_screen/main_screen_widget.dart';
+
+import '../../Library/Widgets/Inherited/provider.dart';
+
 
 class AuthWidget extends StatefulWidget {
   const AuthWidget({Key? key}) : super(key: key);
@@ -18,15 +20,15 @@ class _AuthWidgetState extends State<AuthWidget> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: Text(
+        title: const Text(
           "Login to your account",
         ),
-        backgroundColor: Color.fromRGBO(3, 37, 65, 1),
+        backgroundColor: const Color.fromRGBO(3, 37, 65, 1),
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 15),
         child: ListView(
-          children: [
+          children: const [
             _HeaderWidget(),
             _FormWidget(),
           ],
@@ -41,42 +43,42 @@ class _HeaderWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final textStyle = TextStyle(fontSize: 16, color: Colors.black);
+    const textStyle = TextStyle(fontSize: 16, color: Colors.black);
 
     return Padding(
       padding: const EdgeInsets.only(bottom: 20),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          SizedBox(
+          const SizedBox(
             height: 20,
           ),
-          Text(
+          const Text(
             "In order to use the editing and rating capabilities of TMDb, as well as get personal recommendations you will need to login to your account. If you do not have an account, registering for an account is free and simple. Click here to get started.",
             style: textStyle,
           ),
-          SizedBox(
+          const SizedBox(
             height: 5,
           ),
           TextButton(
             style: AppButtonStyle.linkButton,
             onPressed: () {},
-            child: Text("Registred"),
+            child: const Text("Registred"),
           ),
-          SizedBox(
+          const SizedBox(
             height: 10,
           ),
-          Text(
+          const Text(
             "If you signed up but didn't get your verification email, click here to have it resent.",
             style: textStyle,
           ),
-          SizedBox(
+          const SizedBox(
             height: 5,
           ),
           TextButton(
             style: AppButtonStyle.linkButton,
             onPressed: () {},
-            child: Text("Verification email"),
+            child: const Text("Verification email"),
           ),
         ],
       ),
@@ -88,9 +90,9 @@ class _FormWidget extends StatelessWidget {
 
   @override
    Widget build(BuildContext context) {
-     final model = AuthProvider.read(context)?.model;
-    final textStyle = TextStyle(fontSize: 16, color: Colors.black);
-    final TextFieldDecorator = const InputDecoration(
+     final model = NotifierProvider.read<AuthModel>(context);
+    const textStyle = TextStyle(fontSize: 16, color: Colors.black);
+    const textFieldDecorator =  InputDecoration(
         border: OutlineInputBorder(),
         contentPadding: EdgeInsets.all(10),
         isCollapsed: true);
@@ -98,37 +100,37 @@ class _FormWidget extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        _ErrorMessageWidget(),
-        Text("Username", style: textStyle),
+        const _ErrorMessageWidget(),
+        const Text("Username", style: textStyle),
         TextField(
           controller: model?.loginTextController,
-          decoration: TextFieldDecorator,
+          decoration: textFieldDecorator,
         ),
-        SizedBox(
+        const SizedBox(
           height: 25,
         ),
-        Text(
+        const Text(
           "Password",
           style: textStyle,
         ),
         TextField(
           controller: model?.passwordTextController,
-          decoration: TextFieldDecorator,
+          decoration: textFieldDecorator,
           obscureText: true,
         ),
-        SizedBox(
+        const SizedBox(
           height: 20,
         ),
         Row(
           children: [
             const _AuthButtonWidget(),
-            SizedBox(
+            const SizedBox(
               width: 15,
             ),
             TextButton(
               onPressed: (){},
               style: AppButtonStyle.linkButton,
-              child: Text("Reset password"),
+              child: const Text("Reset password"),
             ),
           ],
         )
@@ -146,7 +148,7 @@ class _AuthButtonWidget extends StatelessWidget {
   
   @override
   Widget build(BuildContext context) {
-    final model = AuthProvider.watch(context)?.model;
+    final model = NotifierProvider.watch<AuthModel>(context);
     const color = Color(0xFF01B4E4);
     final onPressed = model?.canStartAuth == true ? ( ) => model?.auth(context) : null;
     final child = model?.isAuthProgress == true ? const SizedBox(width: 15,height: 15, child: CircularProgressIndicator(strokeWidth: 2)) : const Text('Login');
@@ -158,10 +160,10 @@ class _AuthButtonWidget extends StatelessWidget {
         ),
         foregroundColor: MaterialStateProperty.all(Colors.white),
         textStyle: MaterialStateProperty.all(
-          TextStyle(fontSize: 16, fontWeight: FontWeight.w700),
+          const TextStyle(fontSize: 16, fontWeight: FontWeight.w700),
         ),
         padding: MaterialStateProperty.all(
-          EdgeInsets.symmetric(horizontal: 15, vertical: 1),
+          const EdgeInsets.symmetric(horizontal: 15, vertical: 1),
         ),
       ),
       child: child,
@@ -173,13 +175,14 @@ class _AuthButtonWidget extends StatelessWidget {
  
    @override
    Widget build(BuildContext context) {
-     final errorMessage = AuthProvider.watch(context)?.model.errorMessage;
+     
+     final errorMessage = NotifierProvider.watch<AuthModel>(context)?.errorMessage;
      if(errorMessage == null) return const SizedBox.shrink();
      return Padding(
        padding: const EdgeInsets.only(bottom: 20),
        child: Text(
               errorMessage,
-              style: TextStyle(color: Colors.red, fontSize: 17),
+              style: const TextStyle(color: Colors.red, fontSize: 17),
             ),
      );
        

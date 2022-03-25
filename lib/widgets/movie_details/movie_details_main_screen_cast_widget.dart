@@ -10,8 +10,8 @@ class MovieDetailsMainScreenCastWidget extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Padding(
-              padding: const EdgeInsets.all(10.0),
+          const Padding(
+              padding: EdgeInsets.all(10.0),
               child: Text(
                 "Series Cast",
                 style: TextStyle(
@@ -46,7 +46,7 @@ class MovieDetailsMainScreenCastWidget extends StatelessWidget {
                         ],
                       ),
                       child: ClipRRect(
-                        borderRadius: BorderRadius.all(
+                        borderRadius: const BorderRadius.all(
                           Radius.circular(8),
                         ),
                         clipBehavior: Clip.hardEdge,
@@ -54,10 +54,10 @@ class MovieDetailsMainScreenCastWidget extends StatelessWidget {
                           children: [
                             Image.asset("images/e.jpg"),
                             Padding(
-                              padding: EdgeInsets.all(8),
+                              padding: const EdgeInsets.all(8),
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
+                                children: const [
                                   Text("Idris Elba", maxLines: 1),
                                   SizedBox(height: 7),
                                   Text("Robert DuBois / Bloodsport",
@@ -79,7 +79,7 @@ class MovieDetailsMainScreenCastWidget extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.all(3.0),
             child:
-                TextButton(onPressed: () {}, child: Text("Full Cast & Crew")),
+                TextButton(onPressed: () {}, child: const Text("Full Cast & Crew")),
           )
         ],
       ),

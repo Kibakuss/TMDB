@@ -1,49 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:lazyload/Theme/app_colors.dart';
-import 'package:lazyload/widgets/auth/auth_widget.dart';
-import 'package:lazyload/widgets/auth/main_screen/main_screen_widget.dart';
-import 'package:lazyload/widgets/auth/movie_details/movie_details_widget.dart';
 
-import 'widgets/auth/auth_model.dart';
+import 'widgets/app/my_app.dart';
+import 'widgets/app/my_app_model.dart';
 
-void main() {
-  runApp(const MyApp());
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  final model = MyAppModel();
+  await model.checkAuth();
+  runApp(  MyApp(model: model));
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: "Flutter Demo",
-      theme: ThemeData(
-        appBarTheme: AppBarTheme(
-          backgroundColor: AppColors.mainDarkBlue,
-        ),
-        bottomNavigationBarTheme: BottomNavigationBarThemeData(
-          backgroundColor: AppColors.mainDarkBlue,
-          selectedItemColor: Colors.white,
-          unselectedItemColor: Colors.grey,
-        ),
-      ),
-      debugShowCheckedModeBanner: false,
-      routes: {
-        '/auth': (context) =>
-            AuthProvider(model: AuthModel(), child: const AuthWidget()),
-        '/main_screen': (context) => const MainScreenWidget(),
-        '/main_screen/movie_details': (context) {
-          final arguments = ModalRoute.of(context)?.settings.arguments;
-          if (arguments is int) {
-            return MovieDetailsWidget(movieId: arguments);
-          } else {
-            return MovieDetailsWidget(
-              movieId: 0,
-            );
-          }
-        }
-      },
-      initialRoute: "/auth",
-    );
-  }
-}

@@ -1,7 +1,10 @@
-// ignore_for_file: prefer_const_constructors
-
 import 'package:flutter/material.dart';
-import 'package:lazyload/widgets/auth/movie_list/movie_list_widget.dart';
+import 'package:lazyload/domain/data_providers/session_data_provider.dart';
+
+import '../../Library/Widgets/Inherited/provider.dart';
+
+import '../movie_list/movie_list_widget.dart';
+import 'main_screen_model.dart';
 
 class MainScreenWidget extends StatefulWidget {
   const MainScreenWidget({Key? key}) : super(key: key);
@@ -22,14 +25,21 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
 
   @override
   Widget build(BuildContext context) {
+    final model = NotifierProvider.read<MainScreenModel>(context);
+
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: Text("TMDB"),
+        title: const Text("TMDB"),
+        actions: [
+          IconButton(
+              onPressed: () => SessionDataProvider().setSessionId(null),
+              icon: const Icon(Icons.search))
+        ],
       ),
       body: IndexedStack(
         index: _selectedTab,
-        children: [
+        children: const [
           Text(
             'Новости',
           ),
@@ -41,7 +51,7 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
       ),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _selectedTab,
-        items: [
+        items: const [
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
             label: 'Новости',
