@@ -33,10 +33,20 @@ class AuthModel extends ChangeNotifier {
     notifyListeners();
     String? sessionId;
     try {
-       sessionId =
-          await _apiClinet.auth(username: login, password: password);
-    } catch (e) {
-      _errorMessage = 'Неправильный логин или пароль!';
+      sessionId = await _apiClinet.auth(username: login, password: password);
+    } on ApiClientExeption catch (e) {
+      switch (e.type) {
+        case ApiClientExeptionType.Network:
+          _errorMessage =
+              'Сервер не доступен. Проверьте подключение к интернету';
+          break;
+        case ApiClientExeptionType.Auth:
+          _errorMessage = 'Неправильный логин или пароль!';
+          break;
+        case ApiClientExeptionType.Other:
+          _errorMessage = 'Произошла ошибка. Попробуйте ещё раз';
+          break;
+      }
     }
     _isAuthProgress = false;
     if (_errorMessage != null) {
@@ -48,27 +58,8 @@ class AuthModel extends ChangeNotifier {
       notifyListeners();
       return;
     }
-    await _sessionDataProvider.setSessionId(sessionId) ;
-    unawaited(Navigator.of(context).pushReplacementNamed(MainNavigationRouteNames.mainScreen));
-    
+    await _sessionDataProvider.setSessionId(sessionId);
+    unawaited(Navigator.of(context)
+        .pushReplacementNamed(MainNavigationRouteNames.mainScreen));
   }
 }
-
-// class AuthProvider extends InheritedNotifier {
-//   final AuthModel model;
-//   const AuthProvider({Key? key, required Widget child, required this.model})
-//       : super(key: key, child: child, notifier: model);
-
-//   static AuthProvider? watch(BuildContext context) {
-//     return context.dependOnInheritedWidgetOfExactType<AuthProvider>();
-//   }
-
-//   static AuthProvider? read(BuildContext context) {
-//     final widget =
-//         context.getElementForInheritedWidgetOfExactType<AuthProvider>()?.widget;
-//     return widget is AuthProvider ? widget : null;
-//   }
-// }
-
-
-
