@@ -34,16 +34,18 @@ class ApiClient {
     }
   }
 
-  Future<T> _get<T>(String path, T Function(dynamic json) parser,
-      [Map<String, dynamic>? parameters]) async {
+  Future<T> _get<T>(
+    String path,
+    T Function(dynamic json) parser, [
+    Map<String, dynamic>? parameters,
+  ]) async {
     final url = _makeUri(path, parameters);
     try {
       final request = await _client.getUrl(url);
       final response = await request.close();
       final dynamic json = (await response.jsonDecode());
       _validateResponse(response, json);
-
-      final result = parser(json);
+     final result = parser(json);
       return result;
     } on SocketException {
       throw ApiClientExeption(ApiClientExeptionType.Network);
@@ -54,33 +56,15 @@ class ApiClient {
     }
   }
 
-  Future<String> _makeToken() async {
-    final parser = (dynamic json) {
-      final jsonMap = json as Map<String,dynamic>;
-       final token = jsonMap['request_token'] as String;
-    };
-    final result = _get('/authentication/token/new', parser, <String, dynamic>{'api_key': _apiKey});
-    return result;
-   
-    
-  }
+Future<T> _post<T>(String path,Map<String, dynamic> bodyparameters,[Map<String, dynamic>? urlparameters,] ) async {
+  try {
+      final url = _makeUri(path,urlparameters);
+          
 
-  Future<String> _validateUser(
-      {required String username,
-      required String password,
-      required String requestToken}) async {
-    try {
-      final url = _makeUri('/authentication/token/validate_with_login',
-          <String, dynamic>{'api_key': _apiKey});
-
-      final parameters = <String, dynamic>{
-        'username': username,
-        'password': password,
-        'request_token': requestToken,
-      };
+      
       final request = await _client.postUrl(url);
       request.headers.contentType = ContentType.json;
-      request.write(jsonEncode(parameters));
+      request.write(jsonEncode(bodyparameters));
       final response = await request.close();
       final json = (await response.jsonDecode()) as Map<String, dynamic>;
       _validateResponse(response, json);
@@ -94,6 +78,24 @@ class ApiClient {
     } catch (_) {
       throw ApiClientExeption(ApiClientExeptionType.Other);
     }
+}
+
+  Future<String> _makeToken() async {
+    final parser = (dynamic json) {
+      final jsonMap = json as Map<String, dynamic>;
+      final token = jsonMap['request_token'] as String;
+      return token;
+    };
+    final result = _get('/authentication/token/new', parser,
+        <String, dynamic>{'api_key': _apiKey});
+    return result;
+  }
+
+  Future<String> _validateUser(
+      {required String username,
+      required String password,
+      required String requestToken}) async {
+    
   }
 
   Future<String> _makeSession({required String requestToken}) async {
@@ -147,3 +149,5 @@ void _validateResponse(HttpClientResponse response, dynamic json) {
 // 30 - неверный логин пароль
 // 7 - неверный api key
 // 33 - неверный реквест токен
+
+//'/authentication/token/validate_with_login'
