@@ -10,8 +10,8 @@ The Movie Database (TMDB) is a community built movie and TV database
 
 ## 📸 Screenshots :
 
-<img src="images/movies_list.png" width="300"> <img src="images/search.png" width="300"> <img src="lib/movie_details.png" width="300">
-<img src="lib/movie_details2.png" width="300"> 
+<img src="images/movies_list.png" width="300"> <img src="images/search.png" width="300"> <img src="images/movie_details.png" width="300">
+<img src="images/movie_details2.png" width="300"> 
 
 
 
