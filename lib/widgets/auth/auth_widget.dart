@@ -1,11 +1,8 @@
-
-
 import 'package:flutter/material.dart';
-import 'package:lazyload/Theme/app_button_style.dart';
+import 'package:lazyload/theme/app_button_style.dart';
 import 'package:lazyload/widgets/auth/auth_model.dart';
 
-import '../../Library/Widgets/Inherited/provider.dart';
-
+import '../../library/widgets/inherited/provider.dart';
 
 class AuthWidget extends StatefulWidget {
   const AuthWidget({Key? key}) : super(key: key);
@@ -85,18 +82,19 @@ class _HeaderWidget extends StatelessWidget {
     );
   }
 }
+
 class _FormWidget extends StatelessWidget {
-  const _FormWidget({ Key? key }) : super(key: key);
+  const _FormWidget({Key? key}) : super(key: key);
 
   @override
-   Widget build(BuildContext context) {
-     final model = NotifierProvider.read<AuthModel>(context);
+  Widget build(BuildContext context) {
+    final model = NotifierProvider.read<AuthModel>(context);
     const textStyle = TextStyle(fontSize: 16, color: Colors.black);
-    const textFieldDecorator =  InputDecoration(
+    const textFieldDecorator = InputDecoration(
         border: OutlineInputBorder(),
         contentPadding: EdgeInsets.all(10),
         isCollapsed: true);
-    
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -128,7 +126,7 @@ class _FormWidget extends StatelessWidget {
               width: 15,
             ),
             TextButton(
-              onPressed: (){},
+              onPressed: () {},
               style: AppButtonStyle.linkButton,
               child: const Text("Reset password"),
             ),
@@ -142,22 +140,24 @@ class _FormWidget extends StatelessWidget {
 class _AuthButtonWidget extends StatelessWidget {
   const _AuthButtonWidget({
     Key? key,
-   
   }) : super(key: key);
 
-  
   @override
   Widget build(BuildContext context) {
     final model = NotifierProvider.watch<AuthModel>(context);
     const color = Color(0xFF01B4E4);
-    final onPressed = model?.canStartAuth == true ? ( ) => model?.auth(context) : null;
-    final child = model?.isAuthProgress == true ? const SizedBox(width: 15,height: 15, child: CircularProgressIndicator(strokeWidth: 2)) : const Text('Login');
+    final onPressed =
+        model?.canStartAuth == true ? () => model?.auth(context) : null;
+    final child = model?.isAuthProgress == true
+        ? const SizedBox(
+            width: 15,
+            height: 15,
+            child: CircularProgressIndicator(strokeWidth: 2))
+        : const Text('Login');
     return ElevatedButton(
       onPressed: onPressed,
       style: ButtonStyle(
-        backgroundColor: MaterialStateProperty.all(
-          color
-        ),
+        backgroundColor: MaterialStateProperty.all(color),
         foregroundColor: MaterialStateProperty.all(Colors.white),
         textStyle: MaterialStateProperty.all(
           const TextStyle(fontSize: 16, fontWeight: FontWeight.w700),
@@ -170,22 +170,21 @@ class _AuthButtonWidget extends StatelessWidget {
     );
   }
 }
- class _ErrorMessageWidget extends StatelessWidget {
-   const _ErrorMessageWidget({ Key? key }) : super(key: key);
- 
-   @override
-   Widget build(BuildContext context) {
-     
-     final errorMessage = NotifierProvider.watch<AuthModel>(context)?.errorMessage;
-     if(errorMessage == null) return const SizedBox.shrink();
-     return Padding(
-       padding: const EdgeInsets.only(bottom: 20),
-       child: Text(
-              errorMessage,
-              style: const TextStyle(color: Colors.red, fontSize: 17),
-            ),
-     );
-       
-     
-   }
- }
+
+class _ErrorMessageWidget extends StatelessWidget {
+  const _ErrorMessageWidget({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final errorMessage =
+        NotifierProvider.watch<AuthModel>(context)?.errorMessage;
+    if (errorMessage == null) return const SizedBox.shrink();
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 20),
+      child: Text(
+        errorMessage,
+        style: const TextStyle(color: Colors.red, fontSize: 17),
+      ),
+    );
+  }
+}

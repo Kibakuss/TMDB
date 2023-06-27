@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
-enum ApiClientExeptionType { Network, Auth, Other }
+enum ApiClientExeptionType { network, auth, other }
 
 class ApiClientExeption implements Exception {
   final ApiClientExeptionType type;
@@ -48,11 +48,11 @@ class ApiClient {
       final result = parser(json);
       return result;
     } on SocketException {
-      throw ApiClientExeption(ApiClientExeptionType.Network);
+      throw ApiClientExeption(ApiClientExeptionType.network);
     } on ApiClientExeption {
       rethrow;
     } catch (_) {
-      throw ApiClientExeption(ApiClientExeptionType.Other);
+      throw ApiClientExeption(ApiClientExeptionType.other);
     }
   }
 
@@ -75,51 +75,52 @@ class ApiClient {
       final result = parser(json);
       return result;
     } on SocketException {
-      throw ApiClientExeption(ApiClientExeptionType.Network);
+      throw ApiClientExeption(ApiClientExeptionType.network);
     } on ApiClientExeption {
       rethrow;
     } catch (_) {
-      throw ApiClientExeption(ApiClientExeptionType.Other);
+      throw ApiClientExeption(ApiClientExeptionType.other);
     }
   }
 
   Future<String> _makeToken() async {
-    final parser = (dynamic json) {
+    parser(dynamic json) {
       final jsonMap = json as Map<String, dynamic>;
       final token = jsonMap['request_token'] as String;
       return token;
-    };
+    }
+
     final result = _get('/authentication/token/new', parser,
         <String, dynamic>{'api_key': _apiKey});
     return result;
   }
 
-Future<dynamic> popularMovie(int page, String locale) async {
-    final parser = (dynamic json) {
+  Future<dynamic> popularMovie(int page, String locale) async {
+    parser(dynamic json) {
       // final jsonMap = json as Map<String, dynamic>;
       // final token = jsonMap['request_token'] as String;
       // return token;
       return json;
-    };
-    final result = _get<dynamic>('/movie/popular', parser,
-        <String, dynamic>{'api_key': _apiKey,
-        'page': page.toString(),
-        'language' : locale
-        });
+    }
+
+    final result = _get<dynamic>('/movie/popular', parser, <String, dynamic>{
+      'api_key': _apiKey,
+      'page': page.toString(),
+      'language': locale
+    });
     return result;
   }
-
-
 
   Future<String> _validateUser(
       {required String username,
       required String password,
       required String requestToken}) async {
-    final parser = (dynamic json) {
+    parser(dynamic json) {
       final jsonMap = json as Map<String, dynamic>;
       final token = jsonMap['request_token'] as String;
       return token;
-    };
+    }
+
     final parameters = <String, dynamic>{
       'username': username,
       'password': password,
@@ -131,11 +132,12 @@ Future<dynamic> popularMovie(int page, String locale) async {
   }
 
   Future<String> _makeSession({required String requestToken}) async {
-    final parser = (dynamic json) {
+    parser(dynamic json) {
       final jsonMap = json as Map<String, dynamic>;
       final sessionId = jsonMap['session_id'] as String;
       return sessionId;
-    };
+    }
+
     final parameters = <String, dynamic>{
       'request_token': requestToken,
     };
@@ -159,9 +161,9 @@ void _validateResponse(HttpClientResponse response, dynamic json) {
     final dynamic status = json['status_code'];
     final code = status is int ? status : 0;
     if (code == 30) {
-      throw ApiClientExeption(ApiClientExeptionType.Auth);
+      throw ApiClientExeption(ApiClientExeptionType.auth);
     } else {
-      throw ApiClientExeption(ApiClientExeptionType.Other);
+      throw ApiClientExeption(ApiClientExeptionType.other);
     }
   }
 }

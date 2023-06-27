@@ -1,14 +1,15 @@
 import 'package:json_annotation/json_annotation.dart';
 
 part 'movie.g.dart';
-@JsonSerializable(fieldRename: FieldRename.snake )
+
+@JsonSerializable(fieldRename: FieldRename.snake)
 class Movie {
   final String? posterPath;
   final bool adult;
   final String overview;
-@JsonKey(fromJson: _parseDateFromString)
+  @JsonKey(fromJson: _parseDateFromString)
   final DateTime? releaseDate;
-  final List<int> genre_ids;
+  final List<int> genreIds;
   final int id;
   final String originalTitle;
   final String originalLanguage;
@@ -23,7 +24,7 @@ class Movie {
     required this.adult,
     required this.overview,
     this.releaseDate,
-    required this.genre_ids,
+    required this.genreIds,
     required this.id,
     required this.originalTitle,
     required this.originalLanguage,
@@ -35,11 +36,10 @@ class Movie {
     required this.voteAverage,
   });
 
-  factory Movie.fromJson(Map<String,dynamic> json) => _$MovieFromJson(json);
-  Map<String,dynamic> toJson() => _$MovieToJson(this);
-static DateTime? _parseDateFromString(String? rawDate){
-  if (rawDate == null || rawDate.isEmpty) return null;
-  return DateTime.tryParse(rawDate);
-}
-  
+  factory Movie.fromJson(Map<String, dynamic> json) => _$MovieFromJson(json);
+  Map<String, dynamic> toJson() => _$MovieToJson(this);
+  static DateTime? _parseDateFromString(String? rawDate) {
+    if (rawDate == null || rawDate.isEmpty) return null;
+    return DateTime.tryParse(rawDate);
+  }
 }

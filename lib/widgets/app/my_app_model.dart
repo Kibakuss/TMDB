@@ -1,6 +1,6 @@
-import '../../domain/data_providers/session_data_provider.dart';
+import 'package:lazyload/domain/data_providers/session_data_provider.dart';
 
-class MyAppModel{
+class MyAppModel {
   final _sessionDataProvider = SessionDataProvider();
   var _isAuth = false;
   bool get isAuth => _isAuth;

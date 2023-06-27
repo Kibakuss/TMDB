@@ -5,9 +5,9 @@ class MovieDetailsMainInfoWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return const Column(
       crossAxisAlignment: CrossAxisAlignment.start,
-      children: const [
+      children: [
         _TopPosterWidget(),
         Padding(
           padding: EdgeInsets.all(20.0),
@@ -152,17 +152,17 @@ class _DescriptionWidget extends StatelessWidget {
       fontSize: 17,
       fontWeight: FontWeight.w700,
     );
-    const jobTitleStyle =  TextStyle(
+    const jobTitleStyle = TextStyle(
       color: Colors.white,
       fontSize: 16,
       fontWeight: FontWeight.w400,
     );
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 5),
+    return const Padding(
+      padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 5),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text(
+          Text(
             "Overview",
             style: TextStyle(
               fontWeight: FontWeight.w700,
@@ -170,10 +170,10 @@ class _DescriptionWidget extends StatelessWidget {
               color: Colors.white,
             ),
           ),
-          const SizedBox(
+          SizedBox(
             height: 20,
           ),
-          const Text(
+          Text(
             "Supervillains Harley Quinn, Bloodsport, Peacemaker and a collection of nutty cons at Belle Reve prison join the super-secret, super-shady Task Force X as they are dropped off at the remote, enemy-infused island of Corto Maltese.",
             style: TextStyle(
               fontWeight: FontWeight.w400,
@@ -181,7 +181,7 @@ class _DescriptionWidget extends StatelessWidget {
               color: Colors.white,
             ),
           ),
-          const SizedBox(
+          SizedBox(
             height: 20,
           ),
           Row(
@@ -190,7 +190,7 @@ class _DescriptionWidget extends StatelessWidget {
             children: [
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children: const [
+                children: [
                   Text(
                     "James Gunn",
                     style: nameStyle,
@@ -203,7 +203,7 @@ class _DescriptionWidget extends StatelessWidget {
               ),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children: const [
+                children: [
                   Text(
                     "John Ostrander",
                     style: nameStyle,
@@ -216,7 +216,7 @@ class _DescriptionWidget extends StatelessWidget {
               )
             ],
           ),
-          const SizedBox(
+          SizedBox(
             height: 10,
           ),
           Row(
@@ -225,7 +225,7 @@ class _DescriptionWidget extends StatelessWidget {
             children: [
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children: const [
+                children: [
                   Text(
                     "Kim Yale",
                     style: nameStyle,
@@ -238,7 +238,7 @@ class _DescriptionWidget extends StatelessWidget {
               ),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children: const [
+                children: [
                   Text(
                     "John Ostrander",
                     style: nameStyle,
