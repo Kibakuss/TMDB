@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:lazyload/Library/Widgets/Inherited/provider.dart';
-import 'package:lazyload/widgets/auth/auth_model.dart';
-import 'package:lazyload/widgets/auth/auth_widget.dart';
-import 'package:lazyload/widgets/main_screen/main_screen_model.dart';
-import 'package:lazyload/widgets/main_screen/main_screen_widget.dart';
-import 'package:lazyload/widgets/movie_details/movie_details_widget.dart';
+import 'package:lazyload/ui/widgets/auth/auth_model.dart';
+import 'package:lazyload/ui/widgets/auth/auth_widget.dart';
+import 'package:lazyload/ui/widgets/main_screen/main_screen_model.dart';
+import 'package:lazyload/ui/widgets/main_screen/main_screen_widget.dart';
+import 'package:lazyload/ui/widgets/movie_details/movie_details_widget.dart';
 
 class MainNavigationRouteNames {
   static const auth = 'auth';

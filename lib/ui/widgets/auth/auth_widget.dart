@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:lazyload/theme/app_button_style.dart';
-import 'package:lazyload/widgets/auth/auth_model.dart';
-
-import '../../library/widgets/inherited/provider.dart';
+import 'package:lazyload/library/Widgets/Inherited/provider.dart';
+import 'package:lazyload/ui/theme/app_button_style.dart';
+import 'package:lazyload/ui/widgets/auth/auth_model.dart';
 
 class AuthWidget extends StatefulWidget {
   const AuthWidget({Key? key}) : super(key: key);

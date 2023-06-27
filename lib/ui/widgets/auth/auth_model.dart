@@ -1,10 +1,9 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:lazyload/domain/api_client/api_client.dart';
+import 'package:lazyload/domain/data_providers/session_data_provider.dart';
 import 'package:lazyload/ui/navigation/main_navigation.dart';
-
-import '../../domain/api_client/api_client.dart';
-import '../../domain/data_providers/session_data_provider.dart';
 
 class AuthModel extends ChangeNotifier {
   final _apiClinet = ApiClient();

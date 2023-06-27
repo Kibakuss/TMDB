@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:lazyload/theme/app_colors.dart';
 import 'package:lazyload/ui/navigation/main_navigation.dart';
+import 'package:lazyload/ui/theme/app_colors.dart';
 import 'my_app_model.dart';
 
 class MyApp extends StatelessWidget {

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lazyload/Library/Widgets/Inherited/provider.dart';
 import 'package:lazyload/domain/data_providers/session_data_provider.dart';
-import 'package:lazyload/widgets/movie_list/movie_list_widget.dart';
+import 'package:lazyload/ui/widgets/movie_list/movie_list_widget.dart';
 import 'main_screen_model.dart';
 
 class MainScreenWidget extends StatefulWidget {
