@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:lazyload/Library/Widgets/Inherited/provider.dart';
+import 'package:lazyload/library/widgets/inherited/provider.dart';
 import 'package:lazyload/ui/widgets/auth/auth_model.dart';
 import 'package:lazyload/ui/widgets/auth/auth_widget.dart';
 import 'package:lazyload/ui/widgets/main_screen/main_screen_model.dart';

@@ -12,7 +12,7 @@ class MovieDetailsWidget extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  _MovieDetailsWidgetState createState() => _MovieDetailsWidgetState();
+  State<MovieDetailsWidget> createState() => _MovieDetailsWidgetState();
 }
 
 class _MovieDetailsWidgetState extends State<MovieDetailsWidget> {
@@ -28,9 +28,7 @@ class _MovieDetailsWidgetState extends State<MovieDetailsWidget> {
         child: ListView(
           children: const [
             MovieDetailsMainInfoWidget(),
-            SizedBox(
-              height: 30,
-            ),
+            SizedBox(height: 30),
             MovieDetailsMainScreenCastWidget(),
           ],
         ),

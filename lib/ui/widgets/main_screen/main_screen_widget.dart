@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:lazyload/Library/Widgets/Inherited/provider.dart';
+import 'package:lazyload/library/widgets/inherited/provider.dart';
 import 'package:lazyload/domain/data_providers/session_data_provider.dart';
 import 'package:lazyload/ui/widgets/movie_list/movie_list_widget.dart';
 import 'main_screen_model.dart';
@@ -8,7 +8,7 @@ class MainScreenWidget extends StatefulWidget {
   const MainScreenWidget({Key? key}) : super(key: key);
 
   @override
-  _MainScreenWidgetState createState() => _MainScreenWidgetState();
+  State<MainScreenWidget> createState() => _MainScreenWidgetState();
 }
 
 class _MainScreenWidgetState extends State<MainScreenWidget> {
